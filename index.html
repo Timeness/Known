@@ -3,54 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cipher Encoder/Decoder</title>
+    <title>Cipher Tool</title>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-black text-white flex flex-col min-h-screen">
-    <!-- Header -->
-    <header class="w-full py-4 shadow-md text-center text-xl font-bold text-white">
-        Cipher Encoder/Decoder
+<body class="bg-black text-white font-signika">
+    <header class="p-4 bg-gray-800 text-center">
+        <button id="menuButton" class="text-white p-2">☰</button>
+        <h1 class="text-3xl font-bold mt-2">Cipher Tool</h1>
     </header>
 
-    <!-- Main Content -->
-    <main class="flex flex-col items-center justify-center flex-grow py-6">
-        <!-- Mode Selection Menu Button -->
-        <button id="menuButton" class="menu-icon">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23dec4ca' d='M4 18a.97.97 0 0 1-.712-.288A.97.97 0 0 1 3 17q0-.424.288-.712A.97.97 0 0 1 4 16h11q.425 0 .713.288A.97.97 0 0 1 16 17q0 .424-.287.712A.97.97 0 0 1 15 18z' class='duoicon-primary-layer'/%3E%3Cpath fill='%23dec4ca' d='m17.4 12l2.9 2.9a.95.95 0 0 1 .275.7a.95.95 0 0 1-.275.7a.95.95 0 0 1-.7.275a.95.95 0 0 1-.7-.275l-3.6-3.6a.96.96 0 0 1-.3-.7q0-.4.3-.7l3.6-3.6a.95.95 0 0 1 .7-.275q.425 0 .7.275a.95.95 0 0 1 .275.7a.95.95 0 0 1-.275.7z' class='duoicon-secondary-layer' opacity='0.3'/%3E%3Cpath fill='%23dec4ca' d='M4 8a.97.97 0 0 1-.712-.287A.97.97 0 0 1 3 7q0-.425.288-.713A.97.97 0 0 1 4 6h11a.97.97 0 0 1 .713.287A.97.97 0 0 1 16 7a.97.97 0 0 1-.287.713A.97.97 0 0 1 15 8z' class='duoicon-primary-layer'/%3E%3Cpath fill='%23dec4ca' d='M4 13a.97.97 0 0 1-.712-.288A.97.97 0 0 1 3 12q0-.425.288-.713A.97.97 0 0 1 4 11h8a.97.97 0 0 1 .713.287A.97.97 0 0 1 13 12q0 .424-.287.712A.97.97 0 0 1 12 13z' class='duoicon-secondary-layer' opacity='0.3'/%3E%3C/svg%3E" alt="Menu Icon">
-        </button>
+    <div id="modeMenu" class="hidden absolute top-12 left-0 w-full bg-gray-800 text-center p-4">
+        <button onclick="changeMode('reverse')" class="text-white p-2">Reverse Text</button>
+        <button onclick="changeMode('binary')" class="text-white p-2">Binary</button>
+        <button onclick="changeMode('morse')" class="text-white p-2">Morse</button>
+        <button onclick="changeMode('atbash')" class="text-white p-2">Atbash Cipher</button>
+        <button onclick="changeMode('base64')" class="text-white p-2">Base64</button>
+        <button onclick="changeMode('hexadecimal')" class="text-white p-2">Hexadecimal</button>
+        <button onclick="changeMode('leetspeak')" class="text-white p-2">Leetspeak</button>
+        <button onclick="changeMode('rot13')" class="text-white p-2">ROT13</button>
+        <button onclick="changeMode('book')" class="text-white p-2">Book Cipher</button>
+        <button onclick="changeMode('bacon')" class="text-white p-2">Bacon Cipher</button>
+        <button onclick="changeMode('mix')" class="text-white p-2">Mix</button>
+    </div>
 
-        <!-- Mode Selection Menu -->
-        <div id="modeMenu" class="hidden">
-            <button onclick="changeMode('reverse')">Reverse Text</button>
-            <button onclick="changeMode('binary')">Binary</button>
-            <button onclick="changeMode('morse')">Morse Code</button>
-            <button onclick="changeMode('atbash')">Atbash Cipher</button>
-            <button onclick="changeMode('base64')">Base64 Encode</button>
-            <button onclick="changeMode('hexadecimal')">Hexadecimal</button>
-            <button onclick="changeMode('leetspeak')">Leetspeak</button>
-            <button onclick="changeMode('rot13')">ROT13 Cipher</button>
-            <button onclick="changeMode('book')">Book Cipher</button>
-            <button onclick="changeMode('bacon')">Bacon Cipher</button>
-        </div>
-
-        <!-- Title -->
-        <h1 class="text-3xl font-bold text-center mt-6" id="modeTitle">Reverse Text</h1>
-
-        <!-- Input Box -->
-        <textarea id="inputText" placeholder="Enter text..." class="w-4/5 md:w-2/3 p-4 mt-4"></textarea>
-
-        <!-- Convert Button (Only Icon) -->
-        <button id="convertBtn" class="convert-icon mt-4">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23dec4ca' d='M14.312 20q-.927 0-1.581-.65q-.654-.649-.654-1.576t.65-1.582t1.576-.653t1.581.649q.655.649.655 1.577t-.65 1.581q-.65.654-1.577.654m2.188-7q-1.896 0-3.198-1.302T12 8.5t1.302-3.198T16.5 4t3.198 1.302T21 8.5t-1.302 3.198T16.5 13m-9.27 4.23q-1.332 0-2.281-.948T4 14t.949-2.282t2.282-.949t2.282.95t.949 2.281t-.95 2.282t-2.281.949'/%3E%3C/svg%3E" alt="Convert">
-        </button>
-
-        <!-- Output Box -->
-        <textarea id="outputText" placeholder="Output..." readonly class="w-4/5 md:w-2/3 p-4 mt-4"></textarea>
+    <main class="p-4">
+        <h2 id="modeTitle" class="text-2xl text-center">Reverse Text</h2>
+        <textarea id="inputText" class="w-full p-2 mt-4 bg-transparent border border-gray-500 text-white" rows="4" placeholder="Enter text..."></textarea>
+        <button id="convertBtn" class="w-full p-2 mt-4 bg-gray-700">Convert</button>
+        <textarea id="outputText" class="w-full p-2 mt-4 bg-transparent border border-gray-500 text-white" rows="4" placeholder="Output..."></textarea>
     </main>
 
-    <!-- Footer -->
-    <footer class="w-full py-3 text-center text-sm text-white">
-        Created with ❤️ by Cipher Labs
+    <footer class="p-4 bg-gray-800 text-center">
+        <p>&copy; 2025 Cipher Tool</p>
     </footer>
 
     <script src="script.js"></script>
