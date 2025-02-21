@@ -13,23 +13,39 @@
         }
         textarea {
             resize: none;
+            background: transparent;
+            border: 2px solid #4CAF50;
+            outline: none;
+            color: white;
+            font-size: 1.2rem;
+            padding: 10px;
         }
         header, footer {
             background-color: #000;
         }
         /* Custom Switch Icon */
-        .switch-icon::after {
-            display: inline-block;
+        .switch-icon {
             width: 32px;
             height: 32px;
-            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23dec4ca' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='M3 17h2.397a5 5 0 0 0 4.096-2.133l.177-.253m3.66-5.227l.177-.254A5 5 0 0 1 17.603 7H21'/%3E%3Cpath d='m18 4l3 3l-3 3M3 7h2.397a5 5 0 0 1 4.096 2.133l4.014 5.734A5 5 0 0 0 17.603 17H21'/%3E%3Cpath d='m18 20l3-3l-3-3'/%3E%3C/g%3E%3C/svg%3E");
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .switch-icon img {
+            width: 32px;
+            height: 32px;
         }
         /* Convert Button Icon */
-        .convert-icon::after {
-            display: inline-block;
+        .convert-icon {
             width: 32px;
             height: 32px;
-            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23dec4ca' d='M14.312 20q-.927 0-1.581-.65q-.654-.649-.654-1.576t.65-1.582t1.576-.653t1.581.649q.655.649.655 1.577t-.65 1.581q-.65.654-1.577.654m2.188-7q-1.896 0-3.198-1.302T12 8.5t1.302-3.198T16.5 4t3.198 1.302T21 8.5t-1.302 3.198T16.5 13m-9.27 4.23q-1.332 0-2.281-.948T4 14t.949-2.282t2.282-.949t2.282.95t.949 2.281t-.95 2.282t-2.281.949'/%3E%3C/svg%3E");
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .convert-icon img {
+            width: 32px;
+            height: 32px;
         }
     </style>
 </head>
@@ -44,19 +60,23 @@
     <main class="flex flex-col items-center justify-center flex-grow py-6">
         
         <!-- Toggle Mode Button (Only Icon) -->
-        <button id="toggleMode" class="switch-icon bg-gray-800 p-3 rounded-full hover:bg-gray-700 transition"></button>
+        <button id="toggleMode" class="switch-icon">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23dec4ca' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='M3 17h2.397a5 5 0 0 0 4.096-2.133l.177-.253m3.66-5.227l.177-.254A5 5 0 0 1 17.603 7H21'/%3E%3Cpath d='m18 4l3 3l-3 3M3 7h2.397a5 5 0 0 1 4.096 2.133l4.014 5.734A5 5 0 0 0 17.603 17H21'/%3E%3Cpath d='m18 20l3-3l-3-3'/%3E%3C/g%3E%3C/svg%3E" alt="Switch Mode">
+        </button>
 
         <!-- Title -->
         <h1 class="text-3xl font-bold text-center mt-6" id="modeTitle">Binary Spy Code Maker</h1>
 
         <!-- Input Box -->
-        <textarea id="inputText" placeholder="Enter text..." class="w-4/5 md:w-2/3 p-4 text-lg bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 mt-4 text-white"></textarea>
+        <textarea id="inputText" placeholder="Enter text..." class="w-4/5 md:w-2/3 p-4 mt-4"></textarea>
 
         <!-- Convert Button (Only Icon) -->
-        <button id="convertBtn" class="convert-icon bg-green-500 hover:bg-green-600 p-4 rounded-full mt-4 transition"></button>
+        <button id="convertBtn" class="convert-icon mt-4">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23dec4ca' d='M14.312 20q-.927 0-1.581-.65q-.654-.649-.654-1.576t.65-1.582t1.576-.653t1.581.649q.655.649.655 1.577t-.65 1.581q-.65.654-1.577.654m2.188-7q-1.896 0-3.198-1.302T12 8.5t1.302-3.198T16.5 4t3.198 1.302T21 8.5t-1.302 3.198T16.5 13m-9.27 4.23q-1.332 0-2.281-.948T4 14t.949-2.282t2.282-.949t2.282.95t.949 2.281t-.95 2.282t-2.281.949'/%3E%3C/svg%3E" alt="Convert">
+        </button>
 
         <!-- Output Box -->
-        <textarea id="outputText" placeholder="Output..." readonly class="w-4/5 md:w-2/3 p-4 text-lg bg-gray-900 border border-gray-700 rounded-lg mt-4 text-white"></textarea>
+        <textarea id="outputText" placeholder="Output..." readonly class="w-4/5 md:w-2/3 p-4 mt-4"></textarea>
 
     </main>
 
