@@ -1,72 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spy Cipher</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600&display=swap" rel="stylesheet">
+    <title>Satellite Geomap</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        body {
-            font-family: 'Signika', sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .ri--xrp-line::after {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            vertical-align: -0.125em;
-            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23dec4ca' d='M21.778 4h-2.837l-4.49 4.371a3.52 3.52 0 0 1-2.451.99a3.52 3.52 0 0 1-2.452-.99L5.062 4h-2.84L8.13 9.754c2.14 2.083 5.607 2.083 7.745 0zM2.223 20H5.05l4.508-4.385a3.5 3.5 0 0 1 2.443-.985c.914 0 1.792.354 2.443.985L18.952 20h2.826l-5.92-5.761c-2.132-2.073-5.585-2.073-7.715 0z'/%3E%3C/svg%3E");
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
-<body class="bg-black text-white flex flex-col items-center justify-between min-h-screen">
+<body>
+    <div id="map"></div>
 
-    <!-- Navbar -->
-    <nav class="bg-black w-full flex items-center justify-between p-4">
-        <div class="flex items-center">
-            <button id="menuButton" class="ri--xrp-line"></button>
-            <span class="text-white text-2xl font-bold ml-2">SPY</span>
-            <span class="text-white text-2xl ml-1">Cipher</span>
-        </div>
-        <div class="rounded-full w-10 h-10 overflow-hidden">
-            <img alt="User Profile" height="40" src="https://storage.googleapis.com/a1aa/image/qLtpO1etR-v7hejixsy9DmkI_tA0fRPx2ZnD3cOsj8s.jpg" width="40">
-        </div>
-    </nav>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize map
+        var map = L.map('map').setView([20, 78], 5); // Default location (India)
 
-    <!-- Mode Selection Menu -->
-    <div id="modeMenu" class="hidden absolute top-16 left-0 w-full bg-gray-800 text-center p-4">
-        <button onclick="changeMode('reverse')" class="text-white p-2">Reverse</button>
-        <button onclick="changeMode('binary')" class="text-white p-2">Binary</button>
-        <button onclick="changeMode('morse')" class="text-white p-2">Morse</button>
-        <button onclick="changeMode('atbash')" class="text-white p-2">Atbash</button>
-        <button onclick="changeMode('base64')" class="text-white p-2">Base64</button>
-        <button onclick="changeMode('hexadecimal')" class="text-white p-2">Hexadecimal</button>
-        <button onclick="changeMode('leetspeak')" class="text-white p-2">Leetspeak</button>
-        <button onclick="changeMode('rot13')" class="text-white p-2">ROT13</button>
-        <button onclick="changeMode('book')" class="text-white p-2">Book Cipher</button>
-        <button onclick="changeMode('bacon')" class="text-white p-2">Bacon Cipher</button>
-        <button onclick="changeMode('mix')" class="text-white p-2">Mix</button>
-    </div>
+        // Add satellite map layer
+        var satelliteLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '&copy; <a href="https://www.opentopomap.org/">OpenTopoMap</a> contributors'
+        }).addTo(map);
 
-    <!-- Main Content -->
-    <div class="flex flex-col items-center w-full px-4 py-8">
-        <h2 id="modeTitle" class="text-2xl text-center mb-4">Reverse Text</h2>
-        
-        <textarea id="inputText" class="w-full p-2 bg-gray-700 border border-gray-500 text-white rounded-full h-24 mb-4" placeholder="Enter text..."></textarea>
-        
-        <button id="convertBtn" class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-full flex items-center">
-            <i class="fas fa-sync-alt mr-2"></i> Convert
-        </button>
-        
-        <textarea id="outputText" class="w-full p-2 bg-gray-700 border border-gray-500 text-white rounded-full h-24 mt-4" placeholder="Output..." readonly></textarea>
-    </div>
+        // Locate user's position
+        function locateUser() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        var lat = position.coords.latitude;
+                        var lon = position.coords.longitude;
+                        map.setView([lat, lon], 15); // Zoom in to user's location
 
-    <!-- Footer -->
-    <footer class="w-full bg-black py-4 flex items-center justify-center">
-        <p class="text-white">Made with <span class="text-pink-500">💕</span> by SpyCipher Labs</p>
-    </footer>
+                        L.marker([lat, lon])
+                            .addTo(map)
+                            .bindPopup("You are here!")
+                            .openPopup();
+                    },
+                    function () {
+                        alert("Location access denied.");
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by your browser.");
+            }
+        }
 
-    <script src="script.js"></script>
+        locateUser();
+    </script>
 </body>
 </html>
