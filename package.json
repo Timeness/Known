@@ -1,0 +1,14 @@
+{
+  "name": "mapbox-location-app",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "mapbox-gl": "^2.14.1",
+    "mapbox-gl-style-switcher": "^1.1.0"
+  },
+  "devDependencies": {
+    "vite": "^4.0.0"
+  }
+}
