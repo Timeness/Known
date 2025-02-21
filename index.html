@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satellite Geomap</title>
+    <title>Real Satellite Geomap</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         * {
@@ -30,10 +30,10 @@
         // Initialize map
         var map = L.map('map').setView([20, 78], 5); // Default location (India)
 
-        // Add satellite map layer
-        var satelliteLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        // Add real satellite map layer (Esri Satellite)
+        var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             maxZoom: 18,
-            attribution: '&copy; <a href="https://www.opentopomap.org/">OpenTopoMap</a> contributors'
+            attribution: '&copy; <a href="https://www.esri.com/">Esri</a>'
         }).addTo(map);
 
         // Locate user's position
