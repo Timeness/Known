@@ -1,0 +1,58 @@
+body {
+    font-family: 'Signika', sans-serif;
+    background-color: #000;
+}
+textarea {
+    resize: none;
+    background: transparent;
+    border: 2px solid #4CAF50;
+    outline: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px;
+}
+header, footer {
+    background-color: #000;
+}
+.switch-icon {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.switch-icon img {
+    width: 32px;
+    height: 32px;
+}
+.menu-icon {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.menu-icon img {
+    width: 32px;
+    height: 32px;
+}
+#modeMenu {
+    display: none;
+    background: #333;
+    color: white;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+#modeMenu button {
+    padding: 10px;
+    cursor: pointer;
+    background: #444;
+    border: 1px solid #666;
+    margin-bottom: 5px;
+}
+#modeMenu button:hover {
+    background: #555;
+}
