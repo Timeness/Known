@@ -1,58 +1,60 @@
 body {
     font-family: 'Signika', sans-serif;
-    background-color: #000;
+    background-color: black;
+    color: white;
 }
+
+header {
+    background-color: #333;
+    padding: 16px;
+}
+
+button {
+    background-color: #444;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+}
+
+button:hover {
+    background-color: #555;
+}
+
 textarea {
-    resize: none;
-    background: transparent;
-    border: 2px solid #4CAF50;
-    outline: none;
+    background-color: transparent;
+    border: 2px solid #444;
     color: white;
-    font-size: 1.2rem;
-    padding: 10px;
-}
-header, footer {
-    background-color: #000;
-}
-.switch-icon {
-    width: 32px;
-    height: 32px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-.switch-icon img {
-    width: 32px;
-    height: 32px;
-}
-.menu-icon {
-    width: 32px;
-    height: 32px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-}
-.menu-icon img {
-    width: 32px;
-    height: 32px;
-}
-#modeMenu {
-    display: none;
-    background: #333;
-    color: white;
-    position: absolute;
-    top: 50px;
-    left: 0;
     padding: 10px;
     border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
 }
-#modeMenu button {
+
+textarea:focus {
+    outline: none;
+    border-color: #00b3b3;
+}
+
+footer {
+    background-color: #333;
+    padding: 16px;
+}
+
+#modeMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #333;
     padding: 10px;
-    cursor: pointer;
-    background: #444;
-    border: 1px solid #666;
-    margin-bottom: 5px;
 }
-#modeMenu button:hover {
-    background: #555;
+
+#modeMenu button {
+    width: 100%;
+    padding: 10px;
+}
+
+#menuButton {
+    font-size: 24px;
+    cursor: pointer;
 }
