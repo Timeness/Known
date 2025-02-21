@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cipher Tool</title>
+    <title>Spy Cipher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Signika', sans-serif;
+        }
+    </style>
 </head>
-<body class="bg-black text-white font-signika">
-    <header class="p-4 bg-gray-800 text-center">
-        <button id="menuButton" class="text-white p-2">☰</button>
-        <h1 class="text-3xl font-bold mt-2">Cipher Tool</h1>
-    </header>
+<body class="bg-black text-white flex flex-col items-center justify-between min-h-screen">
 
-    <div id="modeMenu" class="hidden absolute top-12 left-0 w-full bg-gray-800 text-center p-4">
-        <button onclick="changeMode('reverse')" class="text-white p-2">Reverse Text</button>
+    <!-- Navbar -->
+    <nav class="bg-black w-full flex items-center justify-between p-4">
+        <div class="flex items-center">
+            <button id="menuButton" class="text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+            <span class="text-white text-2xl font-bold ml-2">SPY</span>
+            <span class="text-white text-2xl ml-1">Cipher</span>
+        </div>
+        <div class="rounded-full w-10 h-10 overflow-hidden">
+            <img alt="Random placeholder image" height="40" src="https://storage.googleapis.com/a1aa/image/qLtpO1etR-v7hejixsy9DmkI_tA0fRPx2ZnD3cOsj8s.jpg" width="40">
+        </div>
+    </nav>
+
+    <!-- Mode Selection Menu -->
+    <div id="modeMenu" class="hidden absolute top-16 left-0 w-full bg-gray-800 text-center p-4">
+        <button onclick="changeMode('reverse')" class="text-white p-2">Reverse</button>
         <button onclick="changeMode('binary')" class="text-white p-2">Binary</button>
         <button onclick="changeMode('morse')" class="text-white p-2">Morse</button>
-        <button onclick="changeMode('atbash')" class="text-white p-2">Atbash Cipher</button>
+        <button onclick="changeMode('atbash')" class="text-white p-2">Atbash</button>
         <button onclick="changeMode('base64')" class="text-white p-2">Base64</button>
         <button onclick="changeMode('hexadecimal')" class="text-white p-2">Hexadecimal</button>
         <button onclick="changeMode('leetspeak')" class="text-white p-2">Leetspeak</button>
@@ -27,15 +44,22 @@
         <button onclick="changeMode('mix')" class="text-white p-2">Mix</button>
     </div>
 
-    <main class="p-4">
-        <h2 id="modeTitle" class="text-2xl text-center">Reverse Text</h2>
-        <textarea id="inputText" class="w-full p-2 mt-4 bg-transparent border border-gray-500 text-white" rows="4" placeholder="Enter text..."></textarea>
-        <button id="convertBtn" class="w-full p-2 mt-4 bg-gray-700">Convert</button>
-        <textarea id="outputText" class="w-full p-2 mt-4 bg-transparent border border-gray-500 text-white" rows="4" placeholder="Output..."></textarea>
-    </main>
+    <!-- Main Content -->
+    <div class="flex flex-col items-center w-full px-4 py-8">
+        <h2 id="modeTitle" class="text-2xl text-center mb-4">Reverse Text</h2>
+        
+        <textarea id="inputText" class="w-full p-2 bg-gray-700 border border-gray-500 text-white rounded-full h-24 mb-4" placeholder="Enter text..."></textarea>
+        
+        <button id="convertBtn" class="bg-yellow-400 text-black font-bold py-2 px-4 rounded-full flex items-center">
+            <i class="fas fa-sync-alt mr-2"></i> Convert
+        </button>
+        
+        <textarea id="outputText" class="w-full p-2 bg-gray-700 border border-gray-500 text-white rounded-full h-24 mt-4" placeholder="Output..." readonly></textarea>
+    </div>
 
-    <footer class="p-4 bg-gray-800 text-center">
-        <p>&copy; 2025 Cipher Tool</p>
+    <!-- Footer -->
+    <footer class="w-full bg-black py-4 flex items-center justify-center">
+        <p class="text-gray-500">Made with <span class="text-pink-500">💕</span> by SpyCipher Labs</p>
     </footer>
 
     <script src="script.js"></script>
